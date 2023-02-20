@@ -4,34 +4,54 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public GameObject enemy;
-    public float maxX;
-    public float minX;
-    public float maxY;
-    public float minY;
-
+    public GameObject enemyRed;
+    public GameObject enemyGreen;
+    public GameObject enemyBlue;
     public float timeBetweenEnemies;
-
     private float spawnTime;
+    public GameObject[] spawns;
+    public float enemySpeed;
+    public float enemySpeedMultiply = 0.0005f;
+    public float enemySpawnMultiply = 0.05f;
+    int enemiesSpawned;
 
-    // Start is called before the first frame update
+    Manager gameManagerScript;
+
+
     void Start()
     {
-        
+        gameManagerScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Manager>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if(Time.time > spawnTime){
             Spawn();
+            gameManagerScript.score += 1;
             spawnTime = Time.time + timeBetweenEnemies;
         }
     }
     void Spawn(){
-        float randomX = Random.Range(minX, maxX);
-        float randomY = Random.Range(minY, maxY);
+        int rand = Random.Range(0, spawns.Length);
+        int enemyTypeRand = Random.Range(0, 100);
 
-        Instantiate(enemy, transform.position + new Vector3(randomX, randomY, 0), transform.rotation);
+        if(enemyTypeRand <= 5 ){
+            Instantiate(enemyGreen, transform.position + spawns[rand].transform.position, transform.rotation);
+        } else if(enemyTypeRand == 11 ){
+            Instantiate(enemyBlue, transform.position + spawns[rand].transform.position, transform.rotation);
+        } else {
+            Instantiate(enemyRed, transform.position + spawns[rand].transform.position, transform.rotation);
+        }
+
+        enemiesSpawned++;
+
+        if(enemySpeed < 50f){
+            enemySpeed = 5 + (enemiesSpawned * enemySpeedMultiply);
+        }
+
+        if(timeBetweenEnemies > 0.2f){
+            timeBetweenEnemies = 0.5f - (enemiesSpawned * enemySpeedMultiply);
+        }
     }
 }

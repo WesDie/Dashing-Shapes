@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Manager : MonoBehaviour
 {
     Image healthbar;  
     GameObject gameOverObject;
     GameObject mainMenuObject;
+    public GameObject scoreText;
+    public GameObject highScoreText;
+    public int score = 0;
+    public int highScore;
 
     void Start()
     {
@@ -17,6 +23,10 @@ public class Manager : MonoBehaviour
         mainMenuObject = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(1).gameObject;
         gameOverObject.SetActive(false);
         mainMenuObject.SetActive(true);
+    }
+    void Update(){
+        scoreText.GetComponent<TMP_Text>().text = "score: " + score;
+        highScoreText.GetComponent<TMP_Text>().text = "high score: " + highScore;
     }
 
     public void OpenMainMenu(){
