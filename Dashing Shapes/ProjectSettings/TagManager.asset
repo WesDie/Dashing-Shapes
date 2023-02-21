@@ -8,6 +8,7 @@ TagManager:
   - Canvas
   - EnemySpawner
   - GameManager
+  - Wall
   layers:
   - Default
   - TransparentFX

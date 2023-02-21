@@ -7,7 +7,7 @@ public class EnemySpawn : MonoBehaviour
     public GameObject enemyRed;
     public GameObject enemyGreen;
     public GameObject enemyBlue;
-    public float timeBetweenEnemies;
+    public float timeBetweenEnemies = 2f;
     private float spawnTime;
     public GameObject[] spawns;
     public float enemySpeed;
@@ -28,6 +28,7 @@ public class EnemySpawn : MonoBehaviour
     {
         if(Time.time > spawnTime){
             Spawn();
+            Spawn();
             gameManagerScript.score += 1;
             spawnTime = Time.time + timeBetweenEnemies;
         }
@@ -47,11 +48,10 @@ public class EnemySpawn : MonoBehaviour
         enemiesSpawned++;
 
         if(enemySpeed < 50f){
-            enemySpeed = 5 + (enemiesSpawned * enemySpeedMultiply);
-        }
-
-        if(timeBetweenEnemies > 0.2f){
-            timeBetweenEnemies = 0.5f - (enemiesSpawned * enemySpeedMultiply);
+            enemySpeed = 10 + (enemiesSpawned * enemySpeedMultiply);
+            if(timeBetweenEnemies > 0.5f){
+                timeBetweenEnemies = 0.6f - (enemiesSpawned * enemySpawnMultiply);
+            }
         }
     }
 }
