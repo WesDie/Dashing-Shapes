@@ -10,16 +10,26 @@ public class LoadNextRoom : MonoBehaviour
     public int enemiesInRoom;
     bool isactived = false;
     bool roomCleared = false;
+    public GameObject EnemyType;
+    public Transform[] spawns;
 
     void Start(){
         roomsRoot = GameObject.FindGameObjectWithTag("CurrentRoomRoot").gameObject;
+        for (int i = 0; i < spawns.Length; i++)
+        {
+            if(Random.Range(0, 10) > 5){
+                Instantiate(EnemyType, spawns[Random.Range(0, 19)].position, Quaternion.identity, transform.GetChild(0).transform);
+            }
+        }
     }
 
     void Update(){
         if(Enemieskilled >= enemiesInRoom){
             transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(3).gameObject.SetActive(false);
         } else {
             transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(3).gameObject.SetActive(true);
             if(!roomCleared){
                 roomCleared = true;
                 GameObject.FindGameObjectWithTag("GameManager").GetComponent<managerGame>().roomsCleared++;
@@ -37,19 +47,19 @@ public class LoadNextRoom : MonoBehaviour
                 transform.GetChild(0).GetChild(i).GetComponent<Enemy>().enabled = true;
                 enemiesInRoom++;
             }
-            if(roomsRoot.transform.childCount == 4){
+            if(roomsRoot.transform.childCount == 3){
+                Vector2 roomNextPos = new Vector2(roomsRoot.transform.GetChild(0).transform.position.x, roomsRoot.transform.GetChild(0).transform.position.y + 30);
+                Instantiate(roomPrefab, roomNextPos, Quaternion.identity, roomsRoot.transform);
+                Debug.Log("Load room 3");
+            }
+            else if(roomsRoot.transform.childCount == 4){
                 Vector2 roomNextPos = new Vector2(roomsRoot.transform.GetChild(0).transform.position.x, roomsRoot.transform.GetChild(0).transform.position.y + 40);
                 Instantiate(roomPrefab, roomNextPos, Quaternion.identity, roomsRoot.transform);
                 Debug.Log("Load room 4");
-            }
-            else if(roomsRoot.transform.childCount == 5){
-                Vector2 roomNextPos = new Vector2(roomsRoot.transform.GetChild(0).transform.position.x, roomsRoot.transform.GetChild(0).transform.position.y + 50);
-                Instantiate(roomPrefab, roomNextPos, Quaternion.identity, roomsRoot.transform);
-                Debug.Log("Load room 5");
-            } else if(roomsRoot.transform.childCount == 6){
+            } else if(roomsRoot.transform.childCount == 5){
                 Debug.Log("Load room and destroy first");
                 Destroy(roomsRoot.transform.GetChild(0).gameObject);
-                Vector2 roomNextPos = new Vector2(roomsRoot.transform.GetChild(0).transform.position.x, roomsRoot.transform.GetChild(0).transform.position.y + 60);
+                Vector2 roomNextPos = new Vector2(roomsRoot.transform.GetChild(0).transform.position.x, roomsRoot.transform.GetChild(0).transform.position.y + 50);
                 Instantiate(roomPrefab, roomNextPos, Quaternion.identity, roomsRoot.transform);
             }
         }

@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - CurrentRoomRoot
   - Bullet
+  - HealthBar
   layers:
   - Default
   - TransparentFX
