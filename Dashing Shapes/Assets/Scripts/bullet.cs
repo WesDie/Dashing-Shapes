@@ -10,16 +10,11 @@ public class bullet : MonoBehaviour
         transform.position += transform.right * Time.deltaTime * -speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Enemy")
-        {
-            Destroy(other);
-        }
 
         if (other.tag == "Wall")
         {
-            Debug.Log("Hit wall");
             Destroy(gameObject);
         }
     }

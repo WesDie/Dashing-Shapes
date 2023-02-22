@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mainCamera : MonoBehaviour
+public class mainCameraArcade : MonoBehaviour
 {
     private float shakeDuration = 0f;
     
@@ -18,7 +18,7 @@ public class mainCamera : MonoBehaviour
 
     void Update()
     {
-         if (shakeDuration > 0)
+        if (shakeDuration > 0)
         {
             transform.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
             

@@ -9,6 +9,9 @@ TagManager:
   - EnemySpawner
   - GameManager
   - Wall
+  - Enemy
+  - CurrentRoomRoot
+  - Bullet
   layers:
   - Default
   - TransparentFX

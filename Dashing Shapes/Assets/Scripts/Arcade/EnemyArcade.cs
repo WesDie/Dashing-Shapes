@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class EnemyArcade : MonoBehaviour
 {
     float speed;
     public enum enmeyType
@@ -15,13 +15,13 @@ public class Enemy : MonoBehaviour
 
     public enmeyType selectedEnemyType;
     Image healthbar;    
-    mainCamera cameraScript;
+    mainCameraArcade cameraScript;
     EnemySpawn enemySpawnScript;
     void Start(){
         enemySpawnScript = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawn>();
         speed = enemySpawnScript.enemySpeed;
         healthbar = GameObject.FindGameObjectWithTag("Health").GetComponent<Image>();
-        cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<mainCamera>();
+        cameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<mainCameraArcade>();
         Destroy(gameObject, 10);
     }
 
