@@ -12,13 +12,20 @@ public class LoadNextRoom : MonoBehaviour
     bool roomCleared = false;
     public GameObject EnemyType;
     public Transform[] spawns;
+    public float changeOfEnemySpawn;
+    public enum enemyType
+    {
+        ExplodingEnemy, 
+        ShootingEnemy
+    }
+    public enemyType selectedEnemyType;
 
     void Start(){
         roomsRoot = GameObject.FindGameObjectWithTag("CurrentRoomRoot").gameObject;
         for (int i = 0; i < spawns.Length; i++)
         {
-            if(Random.Range(0, 10) > 5){
-                Instantiate(EnemyType, spawns[Random.Range(0, 19)].position, Quaternion.identity, transform.GetChild(0).transform);
+            if(Random.Range(0, 10) > changeOfEnemySpawn){
+                Instantiate(EnemyType, spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity, transform.GetChild(0).transform);
             }
         }
     }
@@ -44,7 +51,11 @@ public class LoadNextRoom : MonoBehaviour
             transform.GetChild(2).gameObject.SetActive(true);
             for (int i = 0; i < transform.GetChild(0).childCount; i++)
             {
-                transform.GetChild(0).GetChild(i).GetComponent<Enemy>().enabled = true;
+                if(selectedEnemyType == enemyType.ExplodingEnemy){
+                    transform.GetChild(0).GetChild(i).GetComponent<Enemy>().enabled = true;
+                } else if(selectedEnemyType == enemyType.ShootingEnemy){
+                    transform.GetChild(0).GetChild(i).GetComponent<ShootingEnemy>().enabled = true;
+                }
                 enemiesInRoom++;
             }
             if(roomsRoot.transform.childCount == 3){

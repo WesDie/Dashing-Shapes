@@ -395,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 626569015787887119, guid: eb5b359173b977849baec3377bf10814, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 626569015787887119, guid: eb5b359173b977849baec3377bf10814, type: 3}
       propertyPath: m_LocalPosition.x
@@ -833,7 +833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 626569015787887119, guid: a0cb6a451a5ceb44c98a94c9982efaef, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 626569015787887119, guid: a0cb6a451a5ceb44c98a94c9982efaef, type: 3}
       propertyPath: m_LocalPosition.x
@@ -995,8 +995,8 @@ Camera:
   m_GameObject: {fileID: 1439551600}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.30980393, g: 0.30980393, b: 0.30980393, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1715,7 +1715,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7031421297142531900, guid: a902a86a5497c144fb664bef77869cc0, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7031421297142531900, guid: a902a86a5497c144fb664bef77869cc0, type: 3}
       propertyPath: m_LocalPosition.x

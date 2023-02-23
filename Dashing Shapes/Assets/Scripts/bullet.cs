@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    float speed = 20;
+    public float speed = 20;
     void Update()
     {
         transform.position += transform.right * Time.deltaTime * -speed;
@@ -12,7 +12,6 @@ public class bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.tag == "Wall")
         {
             Destroy(gameObject);

@@ -16,15 +16,16 @@ public class LoadFirstRoom : MonoBehaviour
     {
         if (other.tag == "Player" && !isactived)
         {
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<managerGame>().roomsCleared = 0;
             transform.GetChild(0).gameObject.SetActive(true);
             if(roomsRoot.transform.childCount != 3){
                 for (int i = 0; i < roomsRoot.transform.childCount - 1; i++)
                 {
                     Destroy(roomsRoot.transform.GetChild(i).gameObject);
                 }
-                Vector2 roomNextPos1 = new Vector2(roomsRoot.transform.GetChild(0).transform.position.x, roomsRoot.transform.GetChild(0).transform.position.y + 25);
+                Vector2 roomNextPos1 = new Vector2(transform.position.x, transform.position.y + 10);
                 Instantiate(roomPrefab, roomNextPos1, Quaternion.identity, roomsRoot.transform);
-                Vector2 roomNextPos2 = new Vector2(roomsRoot.transform.GetChild(0).transform.position.x, roomsRoot.transform.GetChild(0).transform.position.y + 35);
+                Vector2 roomNextPos2 = new Vector2(transform.position.x, transform.position.y + 20);
                 Instantiate(roomPrefab, roomNextPos2, Quaternion.identity, roomsRoot.transform);
             }
         }

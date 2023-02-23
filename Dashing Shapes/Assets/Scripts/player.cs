@@ -94,4 +94,13 @@ public class player : MonoBehaviour
     {
         kickback = false;
     }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "EnemyBullet"){
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<mainCamera>().TriggerShake();
+            Destroy(other.gameObject);
+            Health--;
+        }
+    }
 }

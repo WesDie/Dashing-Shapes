@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class moveCamera : MonoBehaviour
 {
-    bool isDone;
     public bool isExitRoom = false;
+    public bool isInExit = false;
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && !isDone)
+        if (other.tag == "Player")
         {
-            isDone = true;
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<mainCamera>().newCameraPos(new Vector3(transform.position.x, transform.position.y, -10f));
-            if(!isExitRoom){
+            if(!isExitRoom && !isInExit){
                 StartCoroutine(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<mainCamera>().ZoomCamera(6.5f, 5f, 1f, 100f));
-            } else{
+            } else if(isExitRoom && !isInExit){
                 StartCoroutine(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<mainCamera>().ZoomCamera(5f, 6.5f, 1f, 100f));
+                transform.GetChild(0).gameObject.SetActive(true);
             }
         }
     }

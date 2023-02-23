@@ -13,6 +13,7 @@ TagManager:
   - CurrentRoomRoot
   - Bullet
   - HealthBar
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
