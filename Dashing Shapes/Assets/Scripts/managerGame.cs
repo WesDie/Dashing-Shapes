@@ -9,6 +9,7 @@ public class managerGame : MonoBehaviour
 {
     public int roomsCleared = -1;
     GameObject roomsClearedtext;
+    public bool isInCharMenu = false;
     void Start()
     {
         roomsClearedtext = GameObject.FindGameObjectWithTag("Canvas").transform.GetChild(0).gameObject;

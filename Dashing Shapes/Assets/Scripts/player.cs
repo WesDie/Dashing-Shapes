@@ -18,7 +18,6 @@ public class player : MonoBehaviour
     void Start ()
     {
         body = GetComponent<Rigidbody2D>();
-        HealthBarObject = GameObject.FindGameObjectWithTag("HealthBar");
     }
 
     void Update()
@@ -32,8 +31,10 @@ public class player : MonoBehaviour
         var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle -180);
 
-        if(Input.GetKeyDown(KeyCode.P)){
+        if(Input.GetKeyDown(KeyCode.P) && Time.timeScale != 0){
             Time.timeScale = 0;
+        } else if(Input.GetKeyDown(KeyCode.P)){
+            Time.timeScale = 1;
         }
 
         if (Input.GetMouseButtonDown(0)){
@@ -47,31 +48,47 @@ public class player : MonoBehaviour
             }
             kickback = true;
         }
-        if(Health == 4){
-            HealthBarObject.transform.GetChild(0).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(1).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(2).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(3).gameObject.SetActive(true);
-        } else if(Health == 3){
-            HealthBarObject.transform.GetChild(0).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(1).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(2).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(3).gameObject.SetActive(false);
-        } else if(Health == 2){
-            HealthBarObject.transform.GetChild(0).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(1).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(2).gameObject.SetActive(false);
-            HealthBarObject.transform.GetChild(3).gameObject.SetActive(false);
-        } else if(Health == 1){
-            HealthBarObject.transform.GetChild(0).gameObject.SetActive(true);
-            HealthBarObject.transform.GetChild(1).gameObject.SetActive(false);
-            HealthBarObject.transform.GetChild(2).gameObject.SetActive(false);
-            HealthBarObject.transform.GetChild(3).gameObject.SetActive(false);
-        }else if(Health == 0){
-            HealthBarObject.transform.GetChild(0).gameObject.SetActive(false);
-            HealthBarObject.transform.GetChild(1).gameObject.SetActive(false);
-            HealthBarObject.transform.GetChild(2).gameObject.SetActive(false);
-            HealthBarObject.transform.GetChild(3).gameObject.SetActive(false);
+        if (Input.GetMouseButtonDown(1)){
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<mainCamera>().TriggerShake();
+            Instantiate(bulletPrefab, posBullet.position, posBullet.rotation);
+            Instantiate(bulletPrefab, posBullet.position, Quaternion.Euler(posBullet.rotation.x, posBullet.rotation.y, posBullet.rotation.z + 5));
+            Instantiate(bulletPrefab, posBullet.position, Quaternion.Euler(posBullet.rotation.x, posBullet.rotation.y, posBullet.rotation.z - 5));
+            body.AddForce(transform.right * 2250f);
+            body.drag = 10f;
+            float bulletKickbackTime = 0.2f;
+            if(kickback == false){
+                Invoke("cancelKickback", bulletKickbackTime);
+            }
+            kickback = true;
+        }
+        if(GameObject.FindGameObjectsWithTag("Canvas").Length != 0){
+            HealthBarObject = GameObject.FindGameObjectWithTag("HealthBar");
+            if(Health == 4){
+                HealthBarObject.transform.GetChild(0).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(1).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(2).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(3).gameObject.SetActive(true);
+            } else if(Health == 3){
+                HealthBarObject.transform.GetChild(0).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(1).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(2).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(3).gameObject.SetActive(false);
+            } else if(Health == 2){
+                HealthBarObject.transform.GetChild(0).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(1).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(2).gameObject.SetActive(false);
+                HealthBarObject.transform.GetChild(3).gameObject.SetActive(false);
+            } else if(Health == 1){
+                HealthBarObject.transform.GetChild(0).gameObject.SetActive(true);
+                HealthBarObject.transform.GetChild(1).gameObject.SetActive(false);
+                HealthBarObject.transform.GetChild(2).gameObject.SetActive(false);
+                HealthBarObject.transform.GetChild(3).gameObject.SetActive(false);
+            }else if(Health == 0){
+                HealthBarObject.transform.GetChild(0).gameObject.SetActive(false);
+                HealthBarObject.transform.GetChild(1).gameObject.SetActive(false);
+                HealthBarObject.transform.GetChild(2).gameObject.SetActive(false);
+                HealthBarObject.transform.GetChild(3).gameObject.SetActive(false);
+            }
         }
     }
 

@@ -16,7 +16,8 @@ public class LoadNextRoom : MonoBehaviour
     public enum enemyType
     {
         ExplodingEnemy, 
-        ShootingEnemy
+        ShootingEnemy,
+        ExplodingBulletEnemy
     }
     public enemyType selectedEnemyType;
 
@@ -55,6 +56,8 @@ public class LoadNextRoom : MonoBehaviour
                     transform.GetChild(0).GetChild(i).GetComponent<Enemy>().enabled = true;
                 } else if(selectedEnemyType == enemyType.ShootingEnemy){
                     transform.GetChild(0).GetChild(i).GetComponent<ShootingEnemy>().enabled = true;
+                }   else if(selectedEnemyType == enemyType.ExplodingBulletEnemy){
+                    transform.GetChild(0).GetChild(i).GetComponent<ExplodingBulletEnemy>().enabled = true;
                 }
                 enemiesInRoom++;
             }
